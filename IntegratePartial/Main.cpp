@@ -3,10 +3,12 @@
 #include "input.h"
 #include "lexer.h"
 #include "parser.h"
+#include "trapezium.h"
 
 int main(int argc, const char* argv[])
 {
-	const char* funcText = getFuncInput(argc, argv);
+	UInput input = getInput(argc, argv);
+	const char* funcText = input.func;
 
 	const Token* tokenList;
 	try
@@ -40,11 +42,10 @@ int main(int argc, const char* argv[])
 		return 1;
 	}
 
-	printTree(syntaxTree); std::cout << std::endl;
-	std::cout << calcVal(syntaxTree, 0);
+	std::cout << trapeziumIntegrate(syntaxTree, input.a, input.b, input.n) << std::endl;
 
 #ifdef _DEBUG
-	std::cin.ignore();
+	std::cin.ignore(); std::cin.ignore();
 #endif
 
 	return 0;
