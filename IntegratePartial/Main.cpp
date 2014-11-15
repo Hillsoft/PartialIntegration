@@ -2,6 +2,7 @@
 
 #include "input.h"
 #include "lexer.h"
+#include "parser.h"
 
 int main(int argc, const char* argv[])
 {
@@ -23,10 +24,24 @@ int main(int argc, const char* argv[])
 		return 1;
 	}
 
-	for (int i = 0; tokenList[i].contents[0] != 0; i++)
+	TreeNode* syntaxTree;
+	try
 	{
-		std::cout << "Type: " << tokenList[i].type << "; Val: " << tokenList[i].contents << "\n";
+		parseExpression(tokenList, syntaxTree);
 	}
+	catch (const char* ex)
+	{
+		std::cout << ex;
+
+#ifdef _DEBUG
+		std::cin.ignore();
+#endif
+
+		return 1;
+	}
+
+	printTree(syntaxTree); std::cout << std::endl;
+	std::cout << calcVal(syntaxTree, 0);
 
 #ifdef _DEBUG
 	std::cin.ignore();

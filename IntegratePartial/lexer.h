@@ -6,7 +6,8 @@
 #define TOKEN_OPERATOR_L2 3
 #define TOKEN_OPERATOR_L3 4
 #define TOKEN_X 5
-#define TOKEN_PARENTHESES 6
+#define TOKEN_OPEN_PARENTHESES 6
+#define TOKEN_CLOSE_PARENTHESES 7
 
 struct Token
 {

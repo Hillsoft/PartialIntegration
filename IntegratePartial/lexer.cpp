@@ -48,11 +48,17 @@ const Token* lex(const char* funcText)
 			break;
 
 		case '(':
+			curCont = new char[2];
+			curCont[0] = funcText[i];
+			curCont[1] = 0;
+			tokenList.push_back(Token(curCont, TOKEN_OPEN_PARENTHESES));
+			break;
+
 		case ')':
 			curCont = new char[2];
 			curCont[0] = funcText[i];
 			curCont[1] = 0;
-			tokenList.push_back(Token(curCont, TOKEN_PARENTHESES));
+			tokenList.push_back(Token(curCont, TOKEN_CLOSE_PARENTHESES));
 			break;
 
 		case '0':
