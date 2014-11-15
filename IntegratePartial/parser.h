@@ -15,6 +15,7 @@ struct TreeNode
 
 void printTree(TreeNode* tree);
 float calcVal(TreeNode* tree, float x);
+void parse(const Token* tokenList, TreeNode*& expTree);
 void parseExpression(const Token* tokenList, TreeNode*& expTree);
 
 #endif

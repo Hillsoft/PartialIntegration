@@ -102,6 +102,9 @@ float calcVal(TreeNode* tree, float x)
 		case '/':
 			result = calcVal(leftOf(tree), x) / calcVal(rightOf(tree), x);
 			break;
+		case '^':
+			result = pow(calcVal(leftOf(tree), x), calcVal(rightOf(tree), x));
+			break;
 		default:
 			throw "Error evaluating syntax tree";
 		}
@@ -202,7 +205,6 @@ void parseTerm(const Token* tokenList, TreeNode*& expTree)
 
 void parseExpression(const Token* tokenList, TreeNode*& expTree)
 {
-	curPos = 0;
 	TreeNode* tempTree = NULL;
 	char op;
 
@@ -216,7 +218,14 @@ void parseExpression(const Token* tokenList, TreeNode*& expTree)
 		parseTerm(tokenList, tempTree);
 		expTree = buildNode(expTree, tempTree, op);
 	}
+}
+
+void parse(const Token* tokenList, TreeNode*& expTree)
+{
+	curPos = 0;
+
+	parseExpression(tokenList, expTree);
 
 	if (tokenList[curPos].contents[0] != '\0')
-		throw "Did not reach end";
+		throw "Parsing failed";
 }
